@@ -13,7 +13,7 @@ baseurl: ''
 lang: en
 
 # Additional parameters for datetime localization, optional. › https://github.com/iamkun/dayjs/tree/dev/src/locale
-prefer_datetime_locale: [en-ca]
+prefer_datetime_locale: en-ca
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
 timezone: America/Toronto
@@ -76,7 +76,7 @@ theme_mode:   # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://catnap.papro.ca/images/catnap.jpg
+avatar: assets/images/catnap.jpg
 
 # boolean type, the global switch for ToC in posts.
 toc: true
