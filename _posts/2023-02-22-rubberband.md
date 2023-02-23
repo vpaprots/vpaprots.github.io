@@ -11,7 +11,7 @@ The cluster is doing its 'job', its teaching me lots; 'ah, thats why they did it
 
 I've scrounged old parts, soldered homemade powersupply out an old laptop power-brick and a bunch of LM2596 boards, to supply 5v to a raspberry, network switch and a sata enclosure; also turned the pi into a router.. Oh.. and the essential piece of hardware. The Blue Rubber Band. Rubber band is essential for electrons to flow!
 
-![image](../assets/images/rubberband.jpeg) 
+![image](../../assets/images/rubberband.jpeg) 
 
 I then patched `devplayer0/docker-net-dhcp` plugin for swarm, installed ceph, wrote my own `docker-volume-rbd` pluggin... might I be finally close to having a stable docker-swarm?? I even have some breadcrumbs from trying to install k3s on top of docker-swarm (the blasphemy!! But more about docker-swarm as a base for cluster in another post..)
 
@@ -47,7 +47,7 @@ Back to basics.. philosopy. I had several considerations when building this out.
     - Will attempt setup without a loadbalancer
     - All one subnet: REJECTED (need to isolate homelab experiments)
 
-![image](../assets/images/HomeLab.drawio.png) 
+![image](../../assets/images/HomeLab.drawio.png) 
 
 # The Software: Full Recovery Process in General
 
@@ -58,13 +58,13 @@ Back to basics.. philosopy. I had several considerations when building this out.
   - Init step CA certs into  (`step-yubikey-init`)
   - Init GPG for ssh-agent
 3. Bootstrap the bootstrap machine!
-    a. Flash vanilla Raspbian onto an SD card
-    b. Replace firstboot.sh on the SD card and boot up Raspberry Pi
+    - a. Flash vanilla Raspbian onto an SD card
+    - b. Replace firstboot.sh on the SD card and boot up Raspberry Pi
         - (SSH keys, systemd-networkd)
-    c. Hit the RasperryPi with an ansible playbook
+    - c. Hit the RasperryPi with an ansible playbook
         - (Docker-compose, Pihole, PXEServer, Docker Registry cache, APT cache)
 4. Hit the (powered-off) cluster with ansible playbook
-    - (WakeOnLan -> PXE+CloudInit -> Docker Swarm -> Ceph)
+    - (WakeOnLan ➜ PXE+CloudInit ➜ Docker Swarm ➜ Ceph)
 
 # Infrastructure-as-Code, Bootstrapping Bare Metal and Off-the-Shelf parts
 
@@ -72,7 +72,7 @@ This is not a new problem, PXE existed for decades at this point and its automat
 - https://github.com/danderson/netboot and the like
 - https://www.reddit.com/r/golang/comments/m49nls/netbootd_automate_os_provisioning_pxe_booting/
 
-I had briefly considered a project that is Canonical-funded: MaaS. Before I knew much about PXE, TFTP and DHCP/BOOTP.. But @TechnoTim has recently posted a video about it so I gave it an honest try. After 3 days, time to give up. It seems raspberry pi and MaaS don't go together yet. I came across [this blog](https://reachablegames.com/tag/maas/) that convinced me that while MaaS is nice and shiny, I can live without it.
+I had briefly considered an off-the-shelf project that is well-funded by Canonical: MaaS. Before I knew much about PXE, TFTP and DHCP/BOOTP, it sounded rather overwhelming. But @TechnoTim has recently posted a video about it so I gave it an honest try. But after 3 days of trying, time to give up; It seems raspberry pi and MaaS don't go together yet. I came across [this blog](https://reachablegames.com/tag/maas/) that convinced me that while MaaS is nice and shiny, I can live without it.
 
 I might go back and experiment with PXE again, but for now, my own [pxeserver](https://github.com/vpaprots/pxeserver) will do the job just as well.
 
